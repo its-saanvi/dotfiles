@@ -142,7 +142,7 @@ local custom = {
 	},
 	images = {
 		overlay = utils.make_image({
-			src = "/home/" .. user .. "/dotfiles/waywall/overlay.png",
+			src = "/home/" .. user .. "/MCSR/overlay.png",
 			dst = { x = 0, y = 315, w = 768, h = 450 },
 		}),
 	},

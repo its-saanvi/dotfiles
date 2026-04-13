@@ -1,5 +1,4 @@
 local cfg = {
-	enabled = false,
 	username = "Its_Saanvi",
 	look = {
 		X = 300,
@@ -24,6 +23,7 @@ local cfg = {
 
 return {
 	url = "https://github.com/arjuncgore/ww_paceman_overlay",
+	enabled = false,
 	config = function(config)
 		require("paceman_overlay.init").setup(config, cfg)
 	end,
