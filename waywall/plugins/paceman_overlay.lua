@@ -25,7 +25,7 @@ return {
 	url = "https://github.com/arjuncgore/ww_paceman_overlay",
 	enabled = false,
 	config = function(config)
-		require("paceman_overlay.init").setup(config, cfg)
+		require("paceman_overlay").setup(config, cfg)
 	end,
 	dependencies = {
 		{

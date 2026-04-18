@@ -15,7 +15,7 @@ local cfg = {
 return {
 	url = "https://github.com/arjuncgore/ww_music_overlay",
 	config = function(config)
-		require("music_overlay.init").setup(config, cfg)
+		require("music_overlay").setup(config, cfg)
 	end,
 	name = "music_overlay",
 	update_on_load = false,
