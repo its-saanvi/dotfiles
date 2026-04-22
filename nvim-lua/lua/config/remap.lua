@@ -55,4 +55,81 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "<leader><Tab>", function()
 		vim.cmd([[copen]])
 	end, { desc = "Quickfix - Open Quickfix Window" })
+
+	vim.keymap.set("n", "<leader><S-F>", function()
+		local out = vim.fn.system({
+			"find",
+			vim.fn.expand("~/Desktop/Projects/"),
+			"-mindepth",
+			"1",
+			"-maxdepth",
+			"1",
+			"-type",
+			"d",
+		})
+		local full_project_names = vim.split(out, "\n")
+		local projects = {}
+		local project_names = {}
+		for _, full_project_name in ipairs(full_project_names) do
+			local project_name = vim.fn.fnamemodify(full_project_name, ":t")
+			projects[project_name] = full_project_name
+			table.insert(project_names, project_name)
+		end
+
+		local pickers = require("telescope.pickers")
+		local finders = require("telescope.finders")
+		local conf = require("telescope.config").values
+		local actions = require("telescope.actions")
+		local action_state = require("telescope.actions.state")
+		pickers
+			.new({}, {
+				prompt_title = "Projects",
+				finder = finders.new_table({
+					results = project_names,
+				}),
+				sorter = conf.generic_sorter({}),
+				attach_mappings = function()
+					actions.select_default:replace(function(prompt_bufnr)
+						local selection = action_state.get_selected_entry()
+						actions.close(prompt_bufnr)
+
+						vim.schedule(function()
+							if not selection then
+								return
+							end
+
+							local project_name = selection.value
+							local must_detach_old = string.find(vim.api.nvim_get_vvar("servername"), "-nvim.sock")
+								== nil
+							local full_project_name = projects[project_name]
+							local socket = "/tmp/" .. project_name .. "-nvim.sock"
+
+							if not (vim.uv or vim.loop).fs_stat(socket) then
+								-- Spawn NEW nvim instance with server
+								vim.fn.jobstart({
+									"nvim",
+									"--listen",
+									socket,
+									"--headless",
+									"-c",
+									"cd " .. full_project_name,
+								}, { detach = true })
+							end
+
+							-- Small delay to allow server to start
+							vim.defer_fn(function()
+								if must_detach_old then
+									vim.cmd("connect! " .. socket)
+								else
+									vim.cmd("connect " .. socket)
+								end
+							end, 100)
+						end)
+					end)
+					return true
+				end,
+			})
+			:find()
+	end, { desc = "Projects - Switch to project" })
+	vim.keymap.set("n", "<leader>d", vim.cmd.detach, { desc = "Projects - Detach from project" })
 end
