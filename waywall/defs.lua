@@ -5,12 +5,14 @@ local State = {}
 --- @class CustomOpts
 --- @field input Input
 --- @field mirrors Mirrors
+--- @field startup_mirrors StartupMirrors
 --- @field images Images
 --- @field resolutions Resolutions
 --- @field theme table<string, any>
 --- @field experimental table<string, any>
 --- @field ninb_path string
 --- @field tmpfs_clear_path string
+--- @field shaders Shaders
 local CustomOpts = {}
 
 --- @class Input
@@ -45,7 +47,19 @@ local Sensitivity = {}
 --- @field tall_pie_entities fun(enable: boolean): nil
 --- @field tall_pie_unspecified fun(enable: boolean): nil
 --- @field tall_pie_destroyProgress fun(enable: boolean): nil
+--- @field fire_res_mirror fun(enable: boolean): nil
 local Mirrors = {}
+
+--- @class Shaders
+local Shaders = {}
+
+--- @class ShaderOpts
+--- @field vertex string?
+--- @field fragment string?
+local ShaderOpts = {}
+
+--- @class StartupMirrors
+local StartupMirrors = {}
 
 --- @class Images
 --- @field overlay fun(enable: boolean): nil
@@ -82,4 +96,5 @@ local ImageOpts = {}
 --- @field src table<string, any>
 --- @field dst table<string, any>
 --- @field color_key table<string, any> | nil
+--- @field shader string | nil
 local MirrorOpts = {}

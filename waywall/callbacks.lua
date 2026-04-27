@@ -8,6 +8,11 @@ local M = {}
 --- @return nil
 M.exec_ninb = function(custom)
 	helpers.toggle_floating()
+	if waywall.floating_shown() then
+		custom.mirrors.fire_res_mirror(true)
+	else
+		custom.mirrors.fire_res_mirror(false)
+	end
 	if not utils.is_ninb_running() then
 		waywall.exec("java -jar " .. custom.ninb_path)
 	end
@@ -20,6 +25,7 @@ M.show_ninb = function(custom)
 		waywall.exec("java -jar " .. custom.ninb_path)
 	end
 	if not waywall.floating_shown() then
+		custom.mirrors.fire_res_mirror(true)
 		waywall.show_floating(true)
 	end
 end
@@ -103,6 +109,15 @@ end
 --- @return nil
 M.generic_disable = function(custom, state)
 	utils.show_mirrors(custom, false, false, false, false)
+end
+
+--- @param custom CustomOpts
+--- @param state State
+--- @return nil
+M.startup_mirrors = function(custom, state)
+	for _, v in pairs(custom.startup_mirrors) do
+		v(true)
+	end
 end
 
 return M

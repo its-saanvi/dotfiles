@@ -21,6 +21,7 @@ package.path = package.path .. ";" .. waywall_share .. "/?/init.lua" .. ";" .. p
 local plug = require("plug")
 local utils = require("utils")
 local callbacks = require("callbacks")
+local waywall = require("waywall")
 
 --- @type State
 local state = {
@@ -159,7 +160,13 @@ local custom = {
 				output = "#2e3440",
 			},
 		}),
+		fire_res_mirror = utils.make_mirror({
+			src = { x = 1820, y = 5, w = 95, h = 98 },
+			dst = { x = 1340, y = 998, w = 80, h = 80 },
+		}),
 	},
+	startup_mirrors = {},
+	shaders = {},
 	images = {
 		overlay = utils.make_image({
 			src = "/home/" .. user .. "/MCSR/overlay.png",
@@ -226,9 +233,14 @@ local config = {
 		repeat_delay = custom.input.repeat_delay,
 		repeat_rate = custom.input.repeat_rate,
 	},
+	shaders = custom.shaders,
 	theme = custom.theme,
 	experimental = custom.experimental,
 }
+
+waywall.listen("load", function()
+	callbacks.startup_mirrors(custom, state)
+end)
 
 config.actions = {
 	-- eye

@@ -113,4 +113,19 @@ M.wrap_function_with_custom = function(func, custom)
 	end
 end
 
+--- @param path string
+--- @return string?
+M.read_file = function(path)
+	local file = io.open(path, "r")
+	if not file then
+		return nil
+	end
+	local data = file:read("*a")
+	if not data then
+		return nil
+	end
+	file:close()
+	return data
+end
+
 return M
