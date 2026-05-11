@@ -18,3 +18,4 @@ My epic dotfiles :3
 - waybar
 - waywall
 - zsh
+- jay
