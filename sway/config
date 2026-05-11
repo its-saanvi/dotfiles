@@ -265,22 +265,23 @@ exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1 &
 exec --no-startup-id sh ~/sway_virtual_monitor.sh &
 
 output "HEADLESS-1" {
-    pos -1920,520
+    pos 0,520
     mode 1920x1080
 }
-
-output "HEADLESS-2" {
-    pos 1920,425
-    mode 1000x750
-}
-
+#
+# output "HEADLESS-2" {
+#     pos 3840,425
+#     # mode 1000x750
+#     mode 1280x720
+# }
+#
 output "DP-4" {
-    pos 0,0
+    pos 1920,0
     mode 1920x1080
 }
 
 workspace $ws10 output HEADLESS-1
-workspace $ws11 output HEADLESS-2
+# workspace $ws11 output HEADLESS-2
 
 exec_always --no-startup-id $HOME/.config/waybar/launch.sh 
 # exec env WAYLAND_DISPLAY="" /opt/Citrix/ICAClient/selfservice &

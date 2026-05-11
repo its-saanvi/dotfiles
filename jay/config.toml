@@ -1,0 +1,360 @@
+#### Keyboard Settings
+# keymap = """
+# xkb_keymap {
+#     xkb_keycodes { include "evdev+aliases(qwerty)" };
+#     xkb_types    { include "complete"              };
+#     xkb_compat   { include "complete"              };
+#     xkb_symbols  { include "pc+us+inet(evdev)+capslock(escape)+ctrl(swap_lalt_lctl)" };
+# };
+# """
+
+repeat-rate = { rate = 45, delay = 185 }
+
+
+#### Visual Features
+workspace-display-order = "sorted"
+show-bar = false
+show-titles = true 
+
+
+#### Behavior Features
+middle-click-paste = false
+focus-follows-mouse = false
+window-management-key = "Super_L"
+pointer-revert-key = "NoSymbol"
+unstable-mouse-follows-focus = true
+fallback-output-mode = "focus"
+use-hardware-cursor = false
+
+#### Startup Actions
+on-graphics-initialized = [
+{ type = "exec", exec = { prog = "jay", args = [ "run-privileged", "sh", "-c", "$HOME/.config/waybar/launch.sh" ], privileged = true }},
+{ type = "exec", exec = { shell = "jay randr virtual-output create 1; sleep 1; wayvnc -S /tmp/wayvnc1.sock 192.168.0.185 5900 -o 'VO-1' --render-cursor & disown", privileged = true }},
+{ type = "exec", exec = { prog = "mako", args = ["--default-timeout", "3000"] } },
+{ type = "exec", exec = { shell = "swaybg -i $HOME/Desktop/livewall/celeste.png -o \"*\"", privileged = true } },
+{ type = "exec", exec = { prog = "blueman-applet", privileged = true } },
+{ type = "exec", exec = { prog = "nm-applet", privileged = true } },
+{ type = "exec", exec = { prog = "qpwgraph", args = ["-m"], privileged = true } },
+{ type = "exec", exec = { shell = "sleep 5 && vesktop --start-minimized --ozone-platform-hint=auto", privileged = true } },
+{ type = "exec", exec = { prog = "wl-paste", args = ["--type", "text", "--watch", "cliphist", "store"], privileged = true } },
+{ type = "exec", exec = { prog = "wl-paste", args = ["--type", "image", "--watch", "cliphist", "store"], privileged = true } },
+{ type = "exec", exec = { prog = "/usr/libexec/polkit-mate-authentication-agent-1", privileged = true } },
+{ type = "show-workspace", name = "1",  output.name = "primary"  },
+{ type = "show-workspace", name = "2",  output.name = "primary"  },
+{ type = "show-workspace", name = "3",  output.name = "primary"  },
+{ type = "show-workspace", name = "4",  output.name = "primary"  },
+{ type = "show-workspace", name = "5",  output.name = "primary"  },
+{ type = "show-workspace", name = "6",  output.name = "primary"  },
+{ type = "show-workspace", name = "7",  output.name = "primary"  },
+{ type = "show-workspace", name = "8",  output.name = "primary"  },
+{ type = "show-workspace", name = "9",  output.name = "primary"  },
+{ type = "show-workspace", name = "10",  output.name = "virtual"  },
+{ type = "show-workspace", name = "1",  output.name = "primary"  },
+]
+
+on-startup = [
+{ type = "exec", exec = { shell = "ydotoold", privileged = true }}
+]
+
+#### Idle Actions
+# idle = {
+#     minutes = 0,
+# }
+
+# on-idle = {
+#     type = "exec",
+#     exec = {
+#         prog = "i3lock",
+#         privileged = true,
+#     },
+# }
+
+
+#### GPU
+render-device = {
+    pci-vendor = 0x10de,
+    pci-model = 0x2d05,
+}
+
+[[drm-devices]]
+name = "dedicated"
+match.syspath = "/sys/devices/pci0000:00/0000:00:01.0"
+# gfx-api = "Vulkan"
+
+#### Theme
+[theme]
+# border-width = 2
+# border-color = "#00FFFF"
+#
+# bar-bg-color = "#1f1d11"
+# bar-status-text-color = "#e6c99d"
+# captured-focused-title-bg-color = "#b97d3e"
+# captured-unfocused-title-bg-color = "#1f1d11"
+# focused-inactive-title-bg-color = "#1f1d11"
+# focused-inactive-title-text-color = "#e6c99d"
+# focused-title-bg-color = "#b97d3e"
+# focused-title-text-color = "#1f1d11"
+# separator-color = "#1f1d11"
+# unfocused-title-bg-color = "#1f1d11"
+# unfocused-title-text-color = "#e6c99d"
+
+
+#### Shortcuts
+[shortcuts]
+
+## Launching Apps
+logo-Return             = { type = "exec", exec = { prog = "ghostty", privileged = true} }
+logo-p                  = { type = "exec", exec = { prog = "wofi", args = ["-i", "--show", "drun", "--prompt", "Search for an application", "--allow-images"], privileged = true }}
+logo-b                  = { type = "exec", exec = "zen-browser" }
+logo-f                  = { type = "exec", exec = "nautilus" }
+logo-m                  = "show-single"
+logo-a                  = "show-all"
+
+## System Actions
+logo-shift-q            = "quit"
+logo-q                  = "close"
+logo-shift-r            = "reload-config-toml"
+logo-ctrl-shift-s       = { type = "exec", exec = { shell = "$HOME/.local/bin/wofi-power-menu" } }
+logo-shift-s            = { type = "exec", exec = { prog = "bash", args = ["-lc", 'grim -g "$(slurp)" - | wl-copy'], privileged = true } }
+XF86AudioRaiseVolume    = { type = "exec", exec = ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "0.05+"] }
+XF86AudioLowerVolume    = { type = "exec", exec = ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "0.05-"] }
+XF86AudioMute           = { type = "exec", exec = ["wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle"] }
+
+
+## Window Movement/Management
+logo-Left               = [
+# "warp-mouse-to-focus",
+    "focus-left"
+]
+logo-h                  = [
+    "focus-left"
+]
+logo-Right              = [
+# "warp-mouse-to-focus",
+    "focus-right"
+]
+logo-l                  = [
+    "focus-right"
+]
+logo-Up                 = [
+# "warp-mouse-to-focus",
+    "focus-up"
+]
+logo-k                  = [
+    "focus-up"
+]
+logo-Down               = [
+# "warp-mouse-to-focus",
+    "focus-down"
+]
+logo-j                  = [
+    "focus-down"
+]
+
+logo-shift-Left         = [
+# "warp-mouse-to-focus",
+    "move-left"
+]
+logo-shift-h            = [
+    "move-left"
+]
+logo-shift-Right        = [
+# "warp-mouse-to-focus",
+    "move-right"
+]
+logo-shift-l            = [
+    "move-right"
+]
+logo-shift-Up           = [
+# "warp-mouse-to-focus",
+    "move-up"
+]
+logo-shift-k            = [
+    "move-up"
+]
+logo-shift-Down         = [
+# "warp-mouse-to-focus",
+    "move-down"
+]
+logo-shift-j            = [
+    "move-down"
+]
+
+logo-ctrl-h             = "split-horizontal"
+logo-ctrl-v             = "split-vertical"
+logo-e                  = "toggle-split"
+logo-shift-f            = "toggle-fullscreen"
+logo-shift-space        = "toggle-floating"
+
+## Workspaces
+logo-1          = [ 
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "1",  output.name = "primary"  }
+]
+logo-2          = [ 
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "2",  output.name = "primary"  }
+]
+logo-3          = [ 
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "3",  output.name = "primary"  }
+]
+logo-4          = [ 
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "4",  output.name = "primary"  }
+]
+logo-5          = [ 
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "5",  output.name = "primary"  }
+]
+logo-6          = [ 
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "6",  output.name = "primary" }
+]
+logo-7          = [ 
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "7",  output.name = "primary" }
+]
+logo-8          = [ 
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "8",  output.name = "primary" }
+]
+logo-9          = [
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "9",  output.name = "primary" }
+]
+logo-0          = [
+# "warp-mouse-to-focus",
+{ type = "show-workspace", name = "10", output.name = "virtual" }
+]
+
+logo-shift-1    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "1" }, 
+{ type = "move-to-output", workspace = "1", output.name = "primary" },
+{ type = "show-workspace", name = "1", output.name = "primary" }
+]
+logo-shift-2    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "2" }, 
+{ type = "move-to-output", workspace = "2", output.name = "primary" },
+{ type = "show-workspace", name = "2", output.name = "primary" }
+]
+logo-shift-3    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "3" }, 
+{ type = "move-to-output", workspace = "3", output.name = "primary" },
+{ type = "show-workspace", name = "3", output.name = "primary" }
+]
+logo-shift-4    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "4" }, 
+{ type = "move-to-output", workspace = "4", output.name = "primary" },
+{ type = "show-workspace", name = "4", output.name = "primary" }
+]
+logo-shift-5    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "5" }, 
+{ type = "move-to-output", workspace = "5", output.name = "primary" },
+{ type = "show-workspace", name = "5", output.name = "primary" }
+]
+logo-shift-6    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "6" }, 
+{ type = "move-to-output", workspace = "6", output.name = "primary" },
+{ type = "show-workspace", name = "6", output.name = "primary" }
+]
+logo-shift-7    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "7" }, 
+{ type = "move-to-output", workspace = "7", output.name = "primary" },
+{ type = "show-workspace", name = "7", output.name = "primary" }
+]
+logo-shift-8    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "8" }, 
+{ type = "move-to-output", workspace = "8", output.name = "primary" },
+{ type = "show-workspace", name = "8", output.name = "primary" }
+]
+logo-shift-9    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "9" }, 
+{ type = "move-to-output", workspace = "9", output.name = "primary" },
+{ type = "show-workspace", name = "9", output.name = "primary" }
+]
+logo-shift-0    = [ 
+# "warp-mouse-to-focus",
+{ type = "move-to-workspace", name = "10" },
+{ type = "move-to-output", workspace = "10", output.name = "primary" },
+{ type = "show-workspace", name = "10", output.name = "virtual" }
+]
+
+
+#### Resize Mode
+[shortcuts.logo-r]
+type = "multi"
+
+[[shortcuts.logo-r.actions]]
+name = "resize"
+type = "push-mode"
+
+[modes.resize.shortcuts.Down]
+dy2 = 100
+type = "resize"
+
+[modes.resize.shortcuts.Left]
+dx1 = -100
+type = "resize"
+
+[modes.resize.shortcuts.Right]
+dx2 = 100
+type = "resize"
+
+[modes.resize.shortcuts.Up]
+dy1 = -100
+type = "resize"
+
+[modes.resize.shortcuts.Escape]
+type = "multi"
+
+[[modes.resize.shortcuts.Escape.actions]]
+cmd = "pop-mode"
+type = "simple"
+
+[modes.resize.shortcuts.logo-r]
+type = "multi"
+
+[[modes.resize.shortcuts.logo-r.actions]]
+cmd = "pop-mode"
+type = "simple"
+
+
+#### Inputs
+[[inputs]]
+tag = "mice"
+match.is-pointer = true
+accel-profile = "Flat"
+accel-speed = -0.86
+
+
+#### Monitors
+[[outputs]]
+name = "primary"
+match.connector = "DP-4"
+x = 1920
+y = 0
+mode = { width = 1920, height = 1080, refresh-rate = 179.961 }
+tearing.mode = "never"
+vrr.mode = "never"
+
+[[outputs]]
+name = "virtual"
+match.connector = "VO-1"
+enabled = true
+x = 0 
+y = 0
+mode = { width = 1920, height = 1080, refresh-rate = 60.000 }
+
+[[windows]]
+match.title-regex = ".*"
+action = "show-single"

@@ -4,7 +4,7 @@
 	"output": [
         "DP-4",
         // "HEADLESS-VIRTUAL_0"
-        "HEADLESS-1"
+        "VO-1"
 	],
         // "layer": "top", // Waybar at top layer
         // "position": "bottom", // Waybar position (top|bottom|left|right)
@@ -14,17 +14,18 @@
         "margin": 3,
         // Choose the order of the modules
         "modules-left": [
-            "sway/workspaces",
-            "sway/mode",
-            "sway/scratchpad",
-            // "sway/workspaces",
-            // "sway/mode",
-            // "sway/scratchpad",
+            "ext/workspaces",
+            // "niri/mode",
+            // "niri/scratchpad",
+            // "niri/workspaces",
+            // "niri/mode",
+            // "niri/scratchpad",
             "custom/media"
         ],
         "modules-center": [
-            "sway/window"
-            // "sway/window"
+            // "niri/window"
+            // "niri/window"
+            "wlr/taskbar"
         ],
         "modules-right": [
             "pulseaudio",
@@ -35,7 +36,7 @@
             "tray"
         ],
         // Modules configuration
-        // "sway/workspaces": {
+        // "niri/workspaces": {
         //     "disable-scroll": true,
         //     "all-outputs": true,
         //     "warp-on-scroll": false,
@@ -60,10 +61,29 @@
                 "unlocked": ""
             }
         },
-        "sway/mode": {
+        "ext/workspaces": {
+            "format": "{name}",
+            "all-outputs": false,
+            "active-only": false,
+            "ignore-hidden": false,
+
+            "sort-by-name": true,
+
+            "on-click": "activate",
+            "disable-scroll": true
+
+        },
+        "wlr/taskbar": {
+            "format": "{name}",
+            "icon-size": 0,
+            "active-first": true,
+            "tooltip": false,
+            "on-click": "activate"
+        },
+        "niri/mode": {
             "format": "<span style=\"italic\">{}</span>"
         },
-        "sway/scratchpad": {
+        "niri/scratchpad": {
             "format": "{icon} {count}",
             "show-empty": false,
             "format-icons": [
@@ -73,10 +93,10 @@
             "tooltip": true,
             "tooltip-format": "{app}: {title}"
         },
-        // "sway/mode": {
+        // "niri/mode": {
         //     "format": "<span style=\"italic\">{}</span>"
         // },
-        // "sway/scratchpad": {
+        // "niri/scratchpad": {
         //     "format": "{icon} {count}",
         //     "show-empty": false,
         //     "format-icons": [
@@ -240,43 +260,43 @@
             "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
             // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
         }
-    },
-    {
-        "output": [
-            // "HEADLESS-VIRTUAL_1"
-            "HEADLESS-2"
-        ],
-        // "layer": "top", // Waybar at top layer
-        // "position": "bottom", // Waybar position (top|bottom|left|right)
-        "height": 30, // Waybar height (to be removed for auto height)
-        "width": 980, // Waybar width
-        "spacing": 4, // Gaps between modules (4px)
-        "margin": 3,
-        // Choose the order of the modules
-        "modules-left": [
-            "sway/workspaces",
-            "sway/mode",
-            "sway/scratchpad",
-            // "sway/workspaces",
-            // "sway/mode",
-            // "sway/scratchpad",
-            "custom/media"
-        ],
-        "modules-center": [
-            "sway/window"
-            // "sway/window"
-        ],
-        "modules-right": [
-            "clock",
-            "tray"
-        ],
-        "clock": {
-            // "timezone": "America/New_York",
-            "format": "{:%d-%m-%Y %I:%M %p}"
-        },
-        "tray": {
-            "icon-size": 18,
-            "spacing": 10
-        }
     }
+    // {
+    //     "output": [
+    //         // "HEADLESS-VIRTUAL_1"
+    //         "HEADLESS-2"
+    //     ],
+    //     // "layer": "top", // Waybar at top layer
+    //     // "position": "bottom", // Waybar position (top|bottom|left|right)
+    //     "height": 30, // Waybar height (to be removed for auto height)
+    //     "width": 980, // Waybar width
+    //     "spacing": 4, // Gaps between modules (4px)
+    //     "margin": 3,
+    //     // Choose the order of the modules
+    //     "modules-left": [
+    //         "niri/workspaces",
+    //         "niri/mode",
+    //         "niri/scratchpad",
+    //         // "niri/workspaces",
+    //         // "niri/mode",
+    //         // "niri/scratchpad",
+    //         "custom/media"
+    //     ],
+    //     "modules-center": [
+    //         "niri/window"
+    //         // "niri/window"
+    //     ],
+    //     "modules-right": [
+    //         "clock",
+    //         "tray"
+    //     ],
+    //     "clock": {
+    //         // "timezone": "America/New_York",
+    //         "format": "{:%d-%m-%Y %I:%M %p}"
+    //     },
+    //     "tray": {
+    //         "icon-size": 18,
+    //         "spacing": 10
+    //     }
+    // }
 ]

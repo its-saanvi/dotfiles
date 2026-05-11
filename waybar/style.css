@@ -147,3 +147,41 @@ window#waybar {
 #window.unfocused {
   color: #565f89;
 }
+
+#taskbar {
+    margin: 0;
+    padding: 0;
+}
+#taskbar button {
+    background: transparent;
+    border: none;
+    color: @text;
+    padding: 0 10px;
+    margin: 0;
+}
+#taskbar button:not(.active) {
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    opacity: 0;
+}
+#taskbar button:not(.active) label {
+    font-size: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+    min-height: 0;
+}
+#taskbar button:not(.active) image {
+    -gtk-icon-transform: scale(0);
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    min-height: 0;
+}
+#taskbar button.active {
+    padding: 0 10px;
+    margin: 0;
+}

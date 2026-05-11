@@ -45,6 +45,7 @@ local custom = {
 		},
 		layout = {
 			primary = "usnw",
+			-- primary = "us",
 			secondary = "us",
 		},
 		confine_pointer = false,
