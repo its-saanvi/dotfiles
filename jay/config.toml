@@ -22,17 +22,18 @@ middle-click-paste = false
 focus-follows-mouse = false
 window-management-key = "Super_L"
 pointer-revert-key = "NoSymbol"
-unstable-mouse-follows-focus = true
+unstable-mouse-follows-focus = false 
 fallback-output-mode = "focus"
 use-hardware-cursor = false
+explicit-sync = true
 
 #### Startup Actions
 on-graphics-initialized = [
 { type = "exec", exec = { prog = "jay", args = [ "run-privileged", "sh", "-c", "$HOME/.config/waybar/launch.sh" ], privileged = true }},
-{ type = "exec", exec = { shell = "jay randr virtual-output create 1; sleep 1; wayvnc -S /tmp/wayvnc1.sock 192.168.0.185 5900 -o 'VO-1' --render-cursor & disown", privileged = true }},
+{ type = "exec", exec = { shell = "jay randr virtual-output create 1; sleep 1; wayvnc -S /tmp/wayvnc1.sock 192.168.0.189 5900 -o 'VO-1' --render-cursor & disown", privileged = true }},
 { type = "exec", exec = { prog = "mako", args = ["--default-timeout", "3000"] } },
 { type = "exec", exec = { shell = "swaybg -i $HOME/Desktop/livewall/celeste.png -o \"*\"", privileged = true } },
-{ type = "exec", exec = { prog = "blueman-applet", privileged = true } },
+{ type = "exec", exec = { shell = "sleep 5 && blueman-applet", privileged = true } },
 { type = "exec", exec = { prog = "nm-applet", privileged = true } },
 { type = "exec", exec = { prog = "qpwgraph", args = ["-m"], privileged = true } },
 { type = "exec", exec = { shell = "sleep 5 && vesktop --start-minimized --ozone-platform-hint=auto", privileged = true } },
@@ -79,7 +80,7 @@ render-device = {
 [[drm-devices]]
 name = "dedicated"
 match.syspath = "/sys/devices/pci0000:00/0000:00:01.0"
-# gfx-api = "Vulkan"
+# gfx-api = "OpenGL"
 
 #### Theme
 [theme]
