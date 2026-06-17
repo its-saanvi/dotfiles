@@ -16,7 +16,7 @@ else
 	file:close()
 	os.remove(plug_path .. "/.check_temp")
 end
-package.path = package.path .. ";" .. waywall_share .. "/?/init.lua" .. ";" .. plug_path .. "/?.lua"
+package.path = package.path .. ";" .. waywall_share .. "/plug/?/init.lua" .. ";" .. plug_path .. "/?.lua"
 
 local plug = require("plug")
 local utils = require("utils")
@@ -38,10 +38,15 @@ local custom = {
 			normal = 6,
 			tall = 0.25,
 		},
+		options = "caps:none",
 		remaps = {
-			["mouse3"] = "rightshift",
-			["mouse4"] = "BackSpace",
-			["mouse5"] = "Home",
+			primary = {
+				["mouse3"] = "rightshift",
+				["mouse4"] = "BackSpace",
+				["mouse5"] = "Home",
+				-- ["right"] = "p",
+				-- ["left"] = "o",
+			},
 		},
 		layout = {
 			primary = "usnw",
@@ -49,8 +54,8 @@ local custom = {
 			secondary = "us",
 		},
 		confine_pointer = false,
-		repeat_delay = 185,
-		repeat_rate = 45,
+		repeat_delay = 180,
+		repeat_rate = 190,
 	},
 	mirrors = {
 		eye_measure = utils.make_mirror({
@@ -175,6 +180,18 @@ local custom = {
 		}),
 	},
 	resolutions = {
+		normal = {
+			w = 1920,
+			h = 1080,
+			enable_pre = callbacks.normal_pre,
+			enable_post = nil,
+			disable_pre = callbacks.normal_pre,
+			disable_post = nil,
+			condition = function()
+				local w, h = waywall.active_res()
+				return w ~= 1920 or h ~= 1080
+			end,
+		},
 		thin = {
 			w = 330,
 			h = 1000,
@@ -199,6 +216,14 @@ local custom = {
 			disable_pre = nil,
 			disable_post = callbacks.generic_disable,
 		},
+		ed_changer = {
+			w = 1000,
+			h = 1080,
+			enable_pre = nil,
+			enable_post = nil,
+			disable_pre = nil,
+			disable_post = nil,
+		},
 	},
 	theme = {
 		background = "#23273b",
@@ -222,15 +247,17 @@ for k, v in pairs(custom.resolutions) do
 		enable_post = utils.wrap_function_with_custom_and_state(v.enable_post, custom, state),
 		disable_pre = utils.wrap_function_with_custom_and_state(v.disable_pre, custom, state),
 		disable_post = utils.wrap_function_with_custom_and_state(v.disable_post, custom, state),
+		condition = utils.wrap_function_with_custom_and_state(v.condition, custom, state),
 	})
 end
 
 local config = {
 	input = {
 		layout = custom.input.layout.primary,
+		options = custom.input.options,
 		sensitivity = custom.input.sensitivity.normal,
 		confine_pointer = custom.input.confine_pointer,
-		remaps = custom.input.remaps,
+		remaps = custom.input.remaps.primary,
 		repeat_delay = custom.input.repeat_delay,
 		repeat_rate = custom.input.repeat_rate,
 	},
@@ -244,16 +271,20 @@ waywall.listen("load", function()
 end)
 
 config.actions = {
+	-- normal
+	-- ["Escape"] = resolutions.normal,
 	-- eye
 	["J"] = resolutions.tall,
 	-- thin
 	["*-grave"] = resolutions.thin,
 	-- wide
 	["*-6"] = resolutions.wide,
+	-- ed changer
+	["alt-1"] = resolutions.ed_changer,
 
 	-- ninb bot
 	["Shift-7"] = utils.wrap_function_with_custom(callbacks.exec_ninb, custom),
-	["*-comma"] = utils.wrap_function_with_custom(callbacks.hide_ninb, custom),
+	-- ["*-comma"] = utils.wrap_function_with_custom(callbacks.hide_ninb, custom),
 	-- ["J"] = toggle_floating,
 
 	-- tmpfs clear

@@ -1,6 +1,7 @@
 {
   "workspace.library": [
-    "./*.lua"
+    "./*.lua",
+    "/home/pramodhsathya/.local/share/waywall/plug/plug/*.lua"
   ],
   "runtime.version": "LuaJIT"
 }

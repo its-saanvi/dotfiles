@@ -8,7 +8,7 @@
 # };
 # """
 
-repeat-rate = { rate = 45, delay = 185 }
+repeat-rate = { rate = 190, delay = 180 }
 
 
 #### Visual Features
@@ -286,7 +286,7 @@ logo-shift-9    = [
 logo-shift-0    = [ 
 # "warp-mouse-to-focus",
 { type = "move-to-workspace", name = "10" },
-{ type = "move-to-output", workspace = "10", output.name = "primary" },
+{ type = "move-to-output", workspace = "10", output.name = "virtual" },
 { type = "show-workspace", name = "10", output.name = "virtual" }
 ]
 
@@ -359,3 +359,7 @@ mode = { width = 1920, height = 1080, refresh-rate = 60.000 }
 [[windows]]
 match.title-regex = ".*"
 action = "show-single"
+
+[[clients]]
+match.comm = "waybar"
+capabilities = ["layer-shell", "foreign-toplevel-list"]

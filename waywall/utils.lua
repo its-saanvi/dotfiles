@@ -44,7 +44,9 @@ M.make_res = function(width, height, callbacks)
 			if callbacks.disable_pre then
 				callbacks.disable_pre()
 			end
-			waywall.set_resolution(0, 0)
+			if callbacks.condition == nil or callbacks.condition() then
+				waywall.set_resolution(0, 0)
+			end
 			if callbacks.disable_post then
 				callbacks.disable_post()
 			end
@@ -52,7 +54,9 @@ M.make_res = function(width, height, callbacks)
 			if callbacks.enable_pre then
 				callbacks.enable_pre()
 			end
-			waywall.set_resolution(width, height)
+			if callbacks.condition == nil or callbacks.condition() then
+				waywall.set_resolution(width, height)
+			end
 			if callbacks.enable_post then
 				callbacks.enable_post()
 			end
@@ -91,13 +95,13 @@ end
 --- @param func fun(custom: CustomOpts, state: State)
 --- @param custom CustomOpts
 --- @param state State
---- @return fun(): nil
+--- @return fun() | nil
 M.wrap_function_with_custom_and_state = function(func, custom, state)
 	if func == nil then
-		return function() end
+		return nil
 	end
 	return function()
-		func(custom, state)
+		return func(custom, state)
 	end
 end
 

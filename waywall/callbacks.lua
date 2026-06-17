@@ -41,7 +41,7 @@ end
 --- @param custom CustomOpts
 --- @return nil
 M.remaps_set = function(custom)
-	waywall.set_remaps(custom.input.remaps)
+	waywall.set_remaps(custom.input.remaps.primary)
 	waywall.set_keymap({ layout = custom.input.layout.primary })
 end
 
@@ -51,6 +51,14 @@ M.remaps_unset = function(custom)
 	waywall.set_remaps({})
 	waywall.set_keymap({ layout = custom.input.layout.secondary })
 end
+
+--- @param custom CustomOpts
+--- @return nil
+M.remaps_pace_set = function(custom) end
+
+--- @param custom CustomOpts
+--- @return nil
+M.remaps_pace_unset = function(custom) end
 
 --- @param custom CustomOpts
 --- @return nil
@@ -117,6 +125,16 @@ end
 M.startup_mirrors = function(custom, state)
 	for _, v in pairs(custom.startup_mirrors) do
 		v(true)
+	end
+end
+
+--- @param custom CustomOpts
+--- @param state State
+--- @return nil
+M.normal_pre = function(custom, state)
+	local w, h = waywall.active_res()
+	if w == 1920 and h == 1080 then
+		waywall.press_key("ESC")
 	end
 end
 

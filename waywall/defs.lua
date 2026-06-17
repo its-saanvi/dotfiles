@@ -17,12 +17,17 @@ local CustomOpts = {}
 
 --- @class Input
 --- @field sensitivity Sensitivity
---- @field remaps table<string, string>
+--- @field options string
+--- @field remaps Remaps
 --- @field layout Layout
 --- @field confine_pointer boolean
 --- @field repeat_delay number
 --- @field repeat_rate number
 local Input = {}
+
+--- @class Remaps
+--- @field primary table<string, string>
+local Remaps = {}
 
 --- @class Layout
 --- @field primary string
@@ -66,9 +71,11 @@ local StartupMirrors = {}
 local Images = {}
 
 --- @class Resolutions
+--- @field normal ResolutionOpts
 --- @field thin ResolutionOpts
 --- @field tall ResolutionOpts
 --- @field wide ResolutionOpts
+--- @field ed_changer ResolutionOpts
 local Resolutions = {}
 
 --- @class ResolutionOpts
@@ -78,6 +85,7 @@ local Resolutions = {}
 --- @field enable_post fun() | nil
 --- @field disable_pre fun() | nil
 --- @field disable_post fun() | nil
+--- @field condition (fun(): boolean) | nil
 local ResolutionOpts = {}
 
 --- @class ResolutionCallbacks
@@ -85,6 +93,7 @@ local ResolutionOpts = {}
 --- @field enable_post fun() | nil
 --- @field disable_pre fun() | nil
 --- @field disable_post fun() | nil
+--- @field condition (fun(): boolean) | nil
 local ResolutionCallbacks = {}
 
 --- @class ImageOpts
