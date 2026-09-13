@@ -1,5 +1,5 @@
-font-family = FiraCode Nerd Font
-font-feature = -calt
+# font-family = FiraCode Nerd Font
+# font-feature = -calt
 font-size = 14
 theme = TokyoNight Night
 shell-integration = zsh

@@ -42,14 +42,14 @@ end
 --- @return nil
 M.remaps_set = function(custom)
 	waywall.set_remaps(custom.input.remaps.primary)
-	waywall.set_keymap({ layout = custom.input.layout.primary })
+	waywall.set_keymap({ layout = custom.input.layout.primary, options = custom.input.options.primary })
 end
 
 --- @param custom CustomOpts
 --- @return nil
 M.remaps_unset = function(custom)
 	waywall.set_remaps({})
-	waywall.set_keymap({ layout = custom.input.layout.secondary })
+	waywall.set_keymap({ layout = custom.input.layout.secondary, options = custom.input.options.secondary })
 end
 
 --- @param custom CustomOpts

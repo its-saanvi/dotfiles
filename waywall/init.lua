@@ -38,7 +38,6 @@ local custom = {
 			normal = 6,
 			tall = 0.25,
 		},
-		options = "caps:none",
 		remaps = {
 			primary = {
 				["mouse3"] = "rightshift",
@@ -52,6 +51,10 @@ local custom = {
 			primary = "usnw",
 			-- primary = "us",
 			secondary = "us",
+		},
+		options = {
+			primary = "caps:none",
+			secondary = "",
 		},
 		confine_pointer = false,
 		repeat_delay = 180,
@@ -171,7 +174,32 @@ local custom = {
 			dst = { x = 1340, y = 998, w = 80, h = 80 },
 		}),
 	},
-	startup_mirrors = {},
+	startup_mirrors = {
+		pie_mobspawner_number0 = utils.make_mirror({
+			src = { x = 1827, y = 859, w = 33, h = 9 },
+			dst = { x = 1618, y = 720, w = 33 * 8, h = 9 * 8 },
+			color_key = {
+				input = "#4de1ca",
+				output = "#FFFFFF",
+			},
+		}),
+		pie_mobspawner_number1 = utils.make_mirror({
+			src = { x = 1827, y = 859 + 8, w = 33, h = 9 },
+			dst = { x = 1618, y = 720, w = 33 * 8, h = 9 * 8 },
+			color_key = {
+				input = "#4de1ca",
+				output = "#FFFFFF",
+			},
+		}),
+		pie_mobspawner_number3 = utils.make_mirror({
+			src = { x = 1827, y = 859 + 8 * 2, w = 33, h = 9 },
+			dst = { x = 1618, y = 720, w = 33 * 8, h = 9 * 8 },
+			color_key = {
+				input = "#4de1ca",
+				output = "#FFFFFF",
+			},
+		}),
+	},
 	shaders = {},
 	images = {
 		overlay = utils.make_image({
@@ -254,7 +282,7 @@ end
 local config = {
 	input = {
 		layout = custom.input.layout.primary,
-		options = custom.input.options,
+		options = custom.input.options.primary,
 		sensitivity = custom.input.sensitivity.normal,
 		confine_pointer = custom.input.confine_pointer,
 		remaps = custom.input.remaps.primary,

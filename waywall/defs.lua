@@ -17,7 +17,7 @@ local CustomOpts = {}
 
 --- @class Input
 --- @field sensitivity Sensitivity
---- @field options string
+--- @field options Options
 --- @field remaps Remaps
 --- @field layout Layout
 --- @field confine_pointer boolean
@@ -33,6 +33,11 @@ local Remaps = {}
 --- @field primary string
 --- @field secondary string
 local Layout = {}
+
+--- @class Options
+--- @field primary string
+--- @field secondary string
+local Options = {}
 
 --- @class Sensitivity
 --- @field normal number
@@ -64,6 +69,9 @@ local Shaders = {}
 local ShaderOpts = {}
 
 --- @class StartupMirrors
+--- @field pie_mobspawner_number0 fun(enable: boolean): nil
+--- @field pie_mobspawner_number1 fun(enable: boolean): nil
+--- @field pie_mobspawner_number3 fun(enable: boolean): nil
 local StartupMirrors = {}
 
 --- @class Images

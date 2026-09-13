@@ -80,7 +80,7 @@ render-device = {
 [[drm-devices]]
 name = "dedicated"
 match.syspath = "/sys/devices/pci0000:00/0000:00:01.0"
-# gfx-api = "OpenGL"
+gfx-api = "OpenGL"
 
 #### Theme
 [theme]
