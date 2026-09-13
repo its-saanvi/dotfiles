@@ -10,7 +10,7 @@ local State = {}
 --- @field resolutions Resolutions
 --- @field theme table<string, any>
 --- @field experimental table<string, any>
---- @field ninb_path string
+--- @field ninb_executable string
 --- @field tmpfs_clear_path string
 --- @field shaders Shaders
 local CustomOpts = {}

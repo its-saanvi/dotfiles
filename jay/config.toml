@@ -30,16 +30,14 @@ explicit-sync = true
 #### Startup Actions
 on-graphics-initialized = [
 { type = "exec", exec = { prog = "jay", args = [ "run-privileged", "sh", "-c", "$HOME/.config/waybar/launch.sh" ], privileged = true }},
-{ type = "exec", exec = { shell = "jay randr virtual-output create 1; sleep 1; wayvnc -S /tmp/wayvnc1.sock 192.168.0.189 5900 -o 'VO-1' --render-cursor & disown", privileged = true }},
+{ type = "exec", exec = { shell = "jay randr virtual-output create 1; sleep 1; wayvnc -S /tmp/wayvnc1.sock 192.168.0.187 5900 -o 'VO-1' --render-cursor & disown", privileged = true }},
 { type = "exec", exec = { prog = "mako", args = ["--default-timeout", "3000"] } },
 { type = "exec", exec = { shell = "swaybg -i $HOME/Desktop/livewall/celeste.png -o \"*\"", privileged = true } },
-{ type = "exec", exec = { shell = "sleep 5 && blueman-applet", privileged = true } },
 { type = "exec", exec = { prog = "nm-applet", privileged = true } },
 { type = "exec", exec = { prog = "qpwgraph", args = ["-m"], privileged = true } },
 { type = "exec", exec = { shell = "sleep 5 && vesktop --start-minimized --ozone-platform-hint=auto", privileged = true } },
 { type = "exec", exec = { prog = "wl-paste", args = ["--type", "text", "--watch", "cliphist", "store"], privileged = true } },
 { type = "exec", exec = { prog = "wl-paste", args = ["--type", "image", "--watch", "cliphist", "store"], privileged = true } },
-{ type = "exec", exec = { prog = "/usr/libexec/polkit-mate-authentication-agent-1", privileged = true } },
 { type = "show-workspace", name = "1",  output.name = "primary"  },
 { type = "show-workspace", name = "2",  output.name = "primary"  },
 { type = "show-workspace", name = "3",  output.name = "primary"  },
@@ -54,7 +52,6 @@ on-graphics-initialized = [
 ]
 
 on-startup = [
-{ type = "exec", exec = { shell = "ydotoold", privileged = true }}
 ]
 
 #### Idle Actions
@@ -106,7 +103,7 @@ gfx-api = "OpenGL"
 ## Launching Apps
 logo-Return             = { type = "exec", exec = { prog = "ghostty", privileged = true} }
 logo-p                  = { type = "exec", exec = { prog = "wofi", args = ["-i", "--show", "drun", "--prompt", "Search for an application", "--allow-images"], privileged = true }}
-logo-b                  = { type = "exec", exec = "zen-browser" }
+logo-b                  = { type = "exec", exec = "zen-beta" }
 logo-f                  = { type = "exec", exec = "nautilus" }
 logo-m                  = "show-single"
 logo-a                  = "show-all"
@@ -115,7 +112,7 @@ logo-a                  = "show-all"
 logo-shift-q            = "quit"
 logo-q                  = "close"
 logo-shift-r            = "reload-config-toml"
-logo-ctrl-shift-s       = { type = "exec", exec = { shell = "$HOME/.local/bin/wofi-power-menu" } }
+logo-ctrl-shift-s       = { type = "exec", exec = { shell = "wofi-power-menu" } }
 logo-shift-s            = { type = "exec", exec = { prog = "bash", args = ["-lc", 'grim -g "$(slurp)" - | wl-copy'], privileged = true } }
 XF86AudioRaiseVolume    = { type = "exec", exec = ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "0.05+"] }
 XF86AudioLowerVolume    = { type = "exec", exec = ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "0.05-"] }

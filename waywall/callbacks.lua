@@ -14,7 +14,7 @@ M.exec_ninb = function(custom)
 		custom.mirrors.fire_res_mirror(false)
 	end
 	if not utils.is_ninb_running() then
-		waywall.exec("java -jar " .. custom.ninb_path)
+		waywall.exec(custom.ninb_executable)
 	end
 end
 
@@ -22,7 +22,7 @@ end
 --- @return nil
 M.show_ninb = function(custom)
 	if not utils.is_ninb_running() then
-		waywall.exec("java -jar " .. custom.ninb_path)
+		waywall.exec(custom.ninb_executable)
 	end
 	if not waywall.floating_shown() then
 		custom.mirrors.fire_res_mirror(true)

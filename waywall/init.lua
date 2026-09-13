@@ -256,13 +256,13 @@ local custom = {
 	theme = {
 		background = "#23273b",
 		ninb_anchor = "topright",
-		cursor_theme = "Adwaita-MC",
+		cursor_theme = "crosshair-cursors",
 	},
 	experimental = {
 		jit = true,
 		tearing = false,
 	},
-	ninb_path = "/home/" .. user .. "/Downloads/NinjaBrain/Ninjabrain-Bot-1.5.2.jar",
+	ninb_executable = "ninjabrain-bot",
 	tmpfs_clear_path = "/home/" .. user .. "/MCSR/tmpfs_clear.sh",
 }
 

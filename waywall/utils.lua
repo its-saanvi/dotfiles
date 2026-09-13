@@ -89,7 +89,15 @@ end
 
 --- @return boolean?
 M.is_ninb_running = function()
-	return os.execute("pgrep -f 'NinjaBrain'")
+	local handle = io.popen("pgrep -f 'ninjabrain-bot'")
+	if handle then
+		local result = handle:read("*l")
+		handle:close()
+		return result ~= nil
+	else
+		print("Error: Command failed.")
+		return
+	end
 end
 
 --- @param func fun(custom: CustomOpts, state: State)
