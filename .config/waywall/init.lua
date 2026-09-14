@@ -1,0 +1,1 @@
+/nix/store/z3r6ainbhxsff4bmwfc8957gxz7xxrrc-waywall-cfg.lua

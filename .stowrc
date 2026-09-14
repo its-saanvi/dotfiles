@@ -1,0 +1,13 @@
+--target=~/
+--ignore=.stowrc
+--ignore=.config/tmux-sessionizer
+--ignore=.config/tmux
+--ignore=.config/sway
+--ignore=.config/rofi
+--ignore=.config/polybar
+--ignore=.config/picom
+--ignore=.config/neofetch
+--ignore=.config/i3status
+--ignore=.config/i3
+--ignore=.config/hyprland
+--ignore=README.md

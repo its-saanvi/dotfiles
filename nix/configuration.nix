@@ -164,58 +164,82 @@
     # Required for container-to-container communication (e.g. podman-compose)
     defaultNetwork.settings.dns_enabled = true;
   };
+
+  systemd.user.services.mate-polkit-authentication-agent = {
+    description = "MATE Polkit Authentication Agent";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
   
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      distrobox
-      gh
-      neovim
-      starship
-      lsd
-      wayland
-      wayland-utils
-      waybar
-      wayvnc
-      ghostty
-      gnome-themes-extra
-      (lib.hiPrio nettools)
-      (lib.hiPrio coreutils)
-      xdg-utils
-      wofi
-      git
-      wget
-      fastfetch
+      # Terminal
+      fzf
+      zsh
       zip
       unzip
-      wl-clipboard
-      psmisc
-      zsh
-      mako
-      swaybg
-      mate-polkit
-      pavucontrol
+      ripgrep
+      lsd
+      ghostty
+      starship
+      fastfetch
+      btop
+      playerctl
+
+      # Apps
+      vim
+      neovim
+      stow
+      gh
+      distrobox
       qpwgraph
-      grim
-      slurp
       mpv
+      steam
+      vesktop
+      spotify
+
+      # Development
+      git
       gcc
       rustc
       cargo
       rustfmt
       rust-analyzer
       clippy
-      steam
+
+      # WM
+      waybar
+      wayvnc
+      gnome-themes-extra
+      wofi
+      mako
+      swaybg
+      mate-polkit
+      pavucontrol
+      grim
+      slurp
       nautilus
-      wireplumber
-      btop
-      ripgrep
-      playerctl
-      fzf
-      vesktop
       networkmanagerapplet      
-      spotify
+
+      # Danger Zone
+      wayland
+      wayland-utils
+      (lib.hiPrio nettools)
+      (lib.hiPrio coreutils)
+      wl-clipboard
+      xdg-utils
+      wget
+      psmisc
+      wireplumber
   ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];  

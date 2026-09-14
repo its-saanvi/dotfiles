@@ -15,22 +15,6 @@
         "type": "github"
       }
     },
-    "dotfiles": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1789364607,
-        "narHash": "sha256-4Z5pJbCjWIMsw86IhzrDNPh6doX6t0zKFi5etIZ7BCw=",
-        "owner": "its-saanvi",
-        "repo": "dotfiles",
-        "rev": "eb8f5c9516f69735e654da66a6dd5de3a2aecd53",
-        "type": "github"
-      },
-      "original": {
-        "owner": "its-saanvi",
-        "repo": "dotfiles",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -104,26 +88,6 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "gitignore.nix",
-        "type": "github"
-      }
-    },
-    "hjem": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1789234255,
-        "narHash": "sha256-0nvWuRbgL4GEKpR8Y4wsB3kmsVgyd0cW8kLHc2BqlTc=",
-        "owner": "feel-co",
-        "repo": "hjem",
-        "rev": "e5e30b4320a8cbcd6cdfc65f044763669a8f0363",
-        "type": "github"
-      },
-      "original": {
-        "owner": "feel-co",
-        "repo": "hjem",
         "type": "github"
       }
     },
@@ -253,8 +217,6 @@
     },
     "root": {
       "inputs": {
-        "dotfiles": "dotfiles",
-        "hjem": "hjem",
         "jay": "jay",
         "mcsr-nixos": "mcsr-nixos",
         "nixpkgs": "nixpkgs",

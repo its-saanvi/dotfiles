@@ -23,28 +23,16 @@
             url = "github:szaffarano/wofi-power-menu";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-
-        hjem = {
-            url = "github:feel-co/hjem";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
-        dotfiles = {
-            url = "github:its-saanvi/dotfiles";
-            flake = false;
-        };
     };
 
-    outputs = { self, nixpkgs, jay, zen-browser, wofi-power-menu, hjem, dotfiles, ... }@inputs: {
+    outputs = { self, nixpkgs, jay, zen-browser, wofi-power-menu, ... }@inputs: {
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = { inherit inputs; };
             modules = [
                 ./configuration.nix
                 ./modules/mcsr.nix
-                hjem.nixosModules.default
                 jay.nixosModules.default
-                ./modules/hjem.nix
                 {
                     programs.jay.enable = true;
                     environment.systemPackages = [
