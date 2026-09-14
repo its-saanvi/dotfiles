@@ -1,5 +1,5 @@
 {
-    description = "Jay WM Flake + Hjem";
+    description = "Jay WM Flake + Stow";
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
