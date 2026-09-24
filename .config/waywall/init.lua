@@ -1,1 +1,1 @@
-/nix/store/mbgvrqr0c4is2fnldvdd7s11agdh5ry1-waywall-cfg.lua
+/nix/store/llb3v7f773vbxilrvhmfpzx9w9zp8zl8-waywall-cfg.lua

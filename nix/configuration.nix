@@ -10,8 +10,15 @@
       /etc/nixos/hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  # Use the GRUB EFI boot loader.
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+  };
+  boot.initrd.systemd.enable = true;
+  boot.kernelParams = [ "quiet" "splash" "vt.global_cursor_default=0" ];
+  # boot.initrd.kernelModules = [ "nvidia" "nvidia-drm" "nvidia-modeset" ];
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
@@ -64,7 +71,7 @@
         package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
   services.displayManager.gdm = {
-	enable = true;
+    enable = true;
   };
   xdg.portal = {
         enable = true;
@@ -117,16 +124,16 @@
   nixpkgs.config.allowUnfree = true;
   programs.dconf.enable = true;
   programs.dconf.profiles.user.databases = [
-      {
-	  lockAll = true;
-          settings = {
-              "org/gnome/desktop/interface" = {
-		  color-scheme = "prefer-dark";
-                  gtk-theme = "Adwaita-dark";
-                  icon-theme = "Adwaita";
-              };
-          };
-      }
+    {
+      lockAll = true;
+      settings = {
+      "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+          gtk-theme = "Adwaita-dark";
+          icon-theme = "Adwaita";
+        };
+      };
+    }
   ];
 
   fonts = {
@@ -172,11 +179,16 @@
     after = [ "graphical-session.target" ];
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
+      ExecStart = "${pkgs.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
       Restart = "on-failure";
       RestartSec = 1;
       TimeoutStopSec = 10;
     };
+  };
+
+  boot.plymouth = {
+    enable = true;
+    theme = "bgrt"; # Default NixOS theme
   };
   
   # List packages installed in system profile.
@@ -215,6 +227,7 @@
       rustfmt
       rust-analyzer
       clippy
+      openjdk25
 
       # WM
       waybar

@@ -71,8 +71,8 @@
             "id": "pipewire_audio_application_capture",
             "versioned_id": "pipewire_audio_application_capture",
             "settings": {
-                "MatchPriorty": 1,
-                "TargetName": "vesktop"
+                "TargetName": "vesktop",
+                "MatchPriorty": 1
             },
             "mixers": 254,
             "sync": 0,
@@ -103,7 +103,7 @@
             "id": "pipewire-screen-capture-source",
             "versioned_id": "pipewire-screen-capture-source",
             "settings": {
-                "RestoreToken": "_iVs1DpEF__rH8XF8TOHjA"
+                "RestoreToken": "xA4sWyVKmc1zmInoTt_jKA"
             },
             "mixers": 0,
             "sync": 0,
@@ -364,7 +364,7 @@
     "saved_projectors": [],
     "preview_locked": false,
     "scaling_enabled": false,
-    "scaling_level": -9,
+    "scaling_level": -17,
     "scaling_off_x": 0.0,
     "scaling_off_y": 0.0,
     "virtual-camera": {
